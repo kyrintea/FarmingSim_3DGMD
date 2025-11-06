@@ -70,7 +70,7 @@ public class Movement : MonoBehaviour
     {
         if (other.CompareTag("Heal"))
         {
-            bARSmanagerScript.Heal(50f);
+            bARSmanagerScript.Heal(10f);
         }
         else if (other.CompareTag("Enemy"))
         {
