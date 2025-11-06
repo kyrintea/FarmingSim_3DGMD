@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Movement : MonoBehaviour
 {
+    private BARSmanagerScript bARSmanagerScript;
     public Camera playerCamera;
     public float speed = 5.0f;
     public float runSpeed = 10.0f;
@@ -26,10 +27,12 @@ public class Movement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        bARSmanagerScript = FindAnyObjectByType<BARSmanagerScript>();
     }
 
     void Update()
-            {
+    {
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
@@ -61,6 +64,17 @@ public class Movement : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Heal"))
+        {
+            bARSmanagerScript.Heal(100);
+        }
+        else if (other.CompareTag("Enemy"))
+        {
+            bARSmanagerScript.TakeDamage(100);
         }
     }
 }

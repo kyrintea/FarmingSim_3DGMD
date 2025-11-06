@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Health
   - Oxygen
+  - Heal
+  - Enemy
   layers:
   - Default
   - TransparentFX
