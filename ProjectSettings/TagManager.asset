@@ -8,6 +8,7 @@ TagManager:
   - Oxygen
   - Heal
   - Enemy
+  - Metal
   layers:
   - Default
   - TransparentFX

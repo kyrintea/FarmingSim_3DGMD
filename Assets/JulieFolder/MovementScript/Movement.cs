@@ -31,7 +31,7 @@ public class Movement : MonoBehaviour
         bARSmanagerScript = FindAnyObjectByType<BARSmanagerScript>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
