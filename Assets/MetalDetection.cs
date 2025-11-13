@@ -6,13 +6,11 @@ using UnityEngine.UI;
 public class MetalDetection : MonoBehaviour
 {
     public float detectionRange = 10f;
-    public GameObject indicatorIcon; // Assign your UI Image or 3D Sprite here
+    public GameObject indicatorIcon; 
     public float flashInterval = 0.2f;
 
     private Coroutine flashCoroutine;
     private bool isFlashing = false;
-
-    // Update is called once per frame
     void Update()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Metal");
@@ -35,7 +33,7 @@ public class MetalDetection : MonoBehaviour
         else if (!enemyInRange && isFlashing)
         {
             StopCoroutine(flashCoroutine);
-            indicatorIcon.SetActive(false); // Ensure icon is off when not flashing
+            indicatorIcon.SetActive(true); 
             isFlashing = false;
         }
     }
