@@ -46,11 +46,6 @@ public class BARSmanagerScript : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TakeDamage(10);
-        }
     }
 
     public void TakeDamage(float damage)
