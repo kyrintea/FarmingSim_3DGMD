@@ -67,5 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "FarmingSim_3DGMD.slnx"
+    "dotnet.defaultSolution": "FarmingSim_3DGMD.slnx",
+    "dotnet.preferCSharpExtension": true
 }
