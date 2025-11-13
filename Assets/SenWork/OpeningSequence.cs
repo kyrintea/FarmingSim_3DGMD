@@ -39,28 +39,10 @@ public class OpeningSequence : MonoBehaviour
         startPos4 = image4.transform.position;*/
     }
 
-    private void Update()
-    {
-        if (counter == 1)
-        {
-            //image1.transform.position = Vector2.Lerp(startPos1, endPos1, lerpTime);
-        }
-        if (counter == 2)
-        {
-            //move image 2 into position
-        }
-        if (counter == 3)
-        {
-            //move image 3 into position
-        }
-        if (counter == 4)
-        {
-            //move image 4 into position
-        }
-    }
-
     public void NextImageButton()
     {
+        daAnimator.SetTrigger("Active");
+        
         counter++;
         print(counter);
 
