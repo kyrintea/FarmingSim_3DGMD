@@ -26,7 +26,6 @@ public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         rectTransform.localScale = originalSize;
 
     }
-
     public void StartGameButton()
     {
         SceneManager.LoadScene("MainScene");
