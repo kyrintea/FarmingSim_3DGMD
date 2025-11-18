@@ -9,6 +9,7 @@ TagManager:
   - Heal
   - Enemy
   - Metal
+  - CraftingBench
   layers:
   - Default
   - TransparentFX
