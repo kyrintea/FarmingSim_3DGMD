@@ -42,14 +42,13 @@ public class OutlineSelection : MonoBehaviour
                     outline = hitTransform.gameObject.AddComponent<Outline>();
                     outline.OutlineColor = Color.magenta; // highlight color
                     outline.OutlineWidth = 20f;
-                    print("Hello");
                 }
 
                 outline.enabled = true;
                 highlightedObject = hitTransform;
 
                 // Press E to collect and destroy
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E) && hitTransform.gameObject.CompareTag("Metal"))
                 {
                     player.ScrapMetal += 1;
                     Destroy(hitTransform.gameObject);
