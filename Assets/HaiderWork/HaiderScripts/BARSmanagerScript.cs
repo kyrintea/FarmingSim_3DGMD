@@ -28,7 +28,7 @@ public class BARSmanagerScript : MonoBehaviour
         HealthBarAmount -= damagePerSecondHunger * Time.deltaTime;
         OxygenBarAmount -= damagePerSecondOxygen * Time.deltaTime;
 
-        // Clamp health between 0 and 100
+        // Clamp bars between 0 and 100
         HealthBarAmount = Mathf.Clamp(HealthBarAmount, 0, 100);
         OxygenBarAmount = Mathf.Clamp(OxygenBarAmount, 0, 100);
 
@@ -53,10 +53,6 @@ public class BARSmanagerScript : MonoBehaviour
         HealthBarAmount -= damage;
         HealthBarAmount = Mathf.Clamp(HealthBarAmount, 0, 100);
         HealthBar.fillAmount = HealthBarAmount / 100f;
-
-        OxygenBarAmount -= damage;
-        OxygenBarAmount = Mathf.Clamp(OxygenBarAmount, 0, 100);
-        OxygenBar.fillAmount = OxygenBarAmount / 100f;
     }
 
     public void Heal(float healAmount)
@@ -64,7 +60,10 @@ public class BARSmanagerScript : MonoBehaviour
         HealthBarAmount += healAmount;
         HealthBarAmount = Mathf.Clamp(HealthBarAmount, 0, 100);
         HealthBar.fillAmount = HealthBarAmount / 100f;
+    }
 
+    public void HealOxygen(float healAmount)
+    {
         OxygenBarAmount += healAmount;
         OxygenBarAmount = Mathf.Clamp(OxygenBarAmount, 0, 100);
         OxygenBar.fillAmount = OxygenBarAmount / 100f;

@@ -7,10 +7,12 @@ public class OutlineSelection : MonoBehaviour
     private RaycastHit hitInfo;
     public float MaxRaycastDistance = 5f;
     private Player player;
+    private BARSmanagerScript bARSmanagerScript;
 
     void Start()
     {
         player = FindAnyObjectByType<Player>();
+        bARSmanagerScript = FindAnyObjectByType<BARSmanagerScript>();
     }
 
     void Update()
@@ -48,11 +50,15 @@ public class OutlineSelection : MonoBehaviour
                 highlightedObject = hitTransform;
 
                 // Press E to collect and destroy
-                if (Input.GetKeyDown(KeyCode.E) && hitTransform.gameObject.CompareTag("Metal"))
+                if (hitTransform.gameObject.CompareTag("Metal") && Input.GetKeyDown(KeyCode.E))
                 {
                     player.ScrapMetal += 1;
                     Destroy(hitTransform.gameObject);
                     highlightedObject = null; // clear reference
+                }
+                else if (hitTransform.gameObject.CompareTag("Heal") && Input.GetKeyDown(KeyCode.E))
+                {
+                    bARSmanagerScript.Heal(25f);
                 }
             }
         }

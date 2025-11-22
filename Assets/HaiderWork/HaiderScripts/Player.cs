@@ -68,13 +68,13 @@ public class Player : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Heal"))
-        {
-            bARSmanagerScript.Heal(10f);
-        }
-        else if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
             bARSmanagerScript.TakeDamage(10f);
+        }
+        else if (other.CompareTag("Oxygen"))
+        {
+            bARSmanagerScript.HealOxygen(100f);
         }
     }
 }
