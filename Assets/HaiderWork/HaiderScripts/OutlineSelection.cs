@@ -8,11 +8,13 @@ public class OutlineSelection : MonoBehaviour
     public float MaxRaycastDistance = 5f;
     private Player player;
     private BARSmanagerScript bARSmanagerScript;
+    private Spaceship spaceship;
 
     void Start()
     {
         player = FindAnyObjectByType<Player>();
         bARSmanagerScript = FindAnyObjectByType<BARSmanagerScript>();
+        spaceship = FindAnyObjectByType<Spaceship>();
     }
 
     void Update()
@@ -59,6 +61,10 @@ public class OutlineSelection : MonoBehaviour
                 else if (hitTransform.gameObject.CompareTag("Heal") && Input.GetKeyDown(KeyCode.E))
                 {
                     bARSmanagerScript.Heal(25f);
+                }
+                else if (hitTransform.gameObject.CompareTag("ShipDoor") && Input.GetKeyDown(KeyCode.E))
+                {
+                    spaceship.ToggleDoor();
                 }
             }
         }
