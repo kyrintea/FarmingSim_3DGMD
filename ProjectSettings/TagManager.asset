@@ -11,6 +11,7 @@ TagManager:
   - Metal
   - CraftingBench
   - ShipDoor
+  - E
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Water
   - UI
   - borders and stuff
-  - 
+  - Crater
   - 
   - 
   - 

@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     float rotationX = 0;
 
     public bool canMove = true; 
+    public float bounceForce = 12f;
 
     CharacterController characterController;
 
@@ -75,6 +76,7 @@ public class Player : MonoBehaviour
         else if (other.CompareTag("Oxygen"))
         {
             bARSmanagerScript.HealOxygen(100f);
+            moveDirection.y = bounceForce;
         }
     }
 }

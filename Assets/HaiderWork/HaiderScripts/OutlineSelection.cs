@@ -5,10 +5,11 @@ public class OutlineSelection : MonoBehaviour
 {
     private Transform highlightedObject;
     private RaycastHit hitInfo;
-    public float MaxRaycastDistance = 5f;
+    public float MaxRaycastDistance = 3f;
     private Player player;
     private BARSmanagerScript bARSmanagerScript;
     private Spaceship spaceship;
+    public GameObject UItextE;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class OutlineSelection : MonoBehaviour
         if (highlightedObject != null)
         {
             Outline previousOutline = highlightedObject.GetComponent<Outline>();
+            UItextE.SetActive(false);
             if (previousOutline != null)
                 previousOutline.enabled = false;
 
@@ -31,7 +33,6 @@ public class OutlineSelection : MonoBehaviour
 
         // Cast ray from camera to mouse
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         if (!EventSystem.current.IsPointerOverGameObject() && Physics.Raycast(ray, out hitInfo, MaxRaycastDistance))
         {
             Transform hitTransform = hitInfo.transform;
@@ -41,6 +42,7 @@ public class OutlineSelection : MonoBehaviour
             {
                 // Enable outline
                 Outline outline = hitTransform.GetComponent<Outline>();
+                
                 if (outline == null)
                 {
                     outline = hitTransform.gameObject.AddComponent<Outline>();
@@ -49,6 +51,7 @@ public class OutlineSelection : MonoBehaviour
                 }
 
                 outline.enabled = true;
+                UItextE.SetActive(true);
                 highlightedObject = hitTransform;
 
                 // Press E to collect and destroy
@@ -56,15 +59,29 @@ public class OutlineSelection : MonoBehaviour
                 {
                     player.ScrapMetal += 1;
                     Destroy(hitTransform.gameObject);
-                    highlightedObject = null; // clear reference
+
+                    UItextE.SetActive(false);
+                    highlightedObject = null;
+
+                    return;   // <- prevents highlight from reactivating
                 }
                 else if (hitTransform.gameObject.CompareTag("Heal") && Input.GetKeyDown(KeyCode.E))
                 {
                     bARSmanagerScript.Heal(25f);
+
+                    UItextE.SetActive(false);
+                    highlightedObject = null;
+
+                    return;
                 }
                 else if (hitTransform.gameObject.CompareTag("ShipDoor") && Input.GetKeyDown(KeyCode.E))
                 {
                     spaceship.ToggleDoor();
+
+                    UItextE.SetActive(false);
+                    highlightedObject = null;
+
+                    return;
                 }
             }
         }
