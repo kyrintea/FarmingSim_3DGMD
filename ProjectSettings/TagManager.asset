@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - Metal
   - CraftingBench
+  - ShipDoor
+  - E
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - Water
   - UI
   - borders and stuff
-  - 
+  - Crater
   - 
   - 
   - 
@@ -44,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Canvas
+    uniqueID: 2046838237
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
