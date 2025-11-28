@@ -9,13 +9,14 @@ public class OutlineSelection : MonoBehaviour
     private Player player;
     private BARSmanagerScript bARSmanagerScript;
     private Spaceship spaceship;
-    public GameObject UItextE;
+    private TextUI textUI;
 
     void Start()
     {
         player = FindAnyObjectByType<Player>();
         bARSmanagerScript = FindAnyObjectByType<BARSmanagerScript>();
         spaceship = FindAnyObjectByType<Spaceship>();
+        textUI = FindAnyObjectByType<TextUI>();
     }
 
     void Update()
@@ -24,7 +25,13 @@ public class OutlineSelection : MonoBehaviour
         if (highlightedObject != null)
         {
             Outline previousOutline = highlightedObject.GetComponent<Outline>();
-            UItextE.SetActive(false);
+            
+            textUI.TextE.SetActive(false);
+            textUI.UseDoor.SetActive(false);
+            textUI.EatFood.SetActive(false);
+            textUI.CraftBatteries.SetActive(false);
+            textUI.CollectScraps.SetActive(false);
+
             if (previousOutline != null)
                 previousOutline.enabled = false;
 
@@ -46,42 +53,62 @@ public class OutlineSelection : MonoBehaviour
                 if (outline == null)
                 {
                     outline = hitTransform.gameObject.AddComponent<Outline>();
-                    outline.OutlineColor = Color.magenta; // highlight color
+                    outline.OutlineColor = Color.white; // highlight color
                     outline.OutlineWidth = 20f;
                 }
 
                 outline.enabled = true;
-                UItextE.SetActive(true);
+                textUI.TextE.SetActive(true);
                 highlightedObject = hitTransform;
 
                 // Press E to collect and destroy
-                if (hitTransform.gameObject.CompareTag("Metal") && Input.GetKeyDown(KeyCode.E))
+                if (hitTransform.gameObject.CompareTag("Metal"))
                 {
-                    player.ScrapMetal += 1;
-                    Destroy(hitTransform.gameObject);
+                    textUI.CollectScraps.SetActive(true);
 
-                    UItextE.SetActive(false);
-                    highlightedObject = null;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        player.ScrapMetal += 1;
+                        Destroy(hitTransform.gameObject);
 
-                    return;   // <- prevents highlight from reactivating
+                        textUI.TextE.SetActive(false);
+                        textUI.CollectScraps.SetActive(true);
+                        highlightedObject = null;
+
+                        return;   // <- prevents highlight from reactivating   
+                    }
                 }
-                else if (hitTransform.gameObject.CompareTag("Heal") && Input.GetKeyDown(KeyCode.E))
+                else if (hitTransform.gameObject.CompareTag("Heal"))
                 {
-                    bARSmanagerScript.Heal(25f);
+                    textUI.EatFood.SetActive(true);
 
-                    UItextE.SetActive(false);
-                    highlightedObject = null;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        bARSmanagerScript.Heal(25f);
 
-                    return;
+                        textUI.TextE.SetActive(false);
+                        highlightedObject = null;
+
+                        return;   
+                    }
                 }
-                else if (hitTransform.gameObject.CompareTag("ShipDoor") && Input.GetKeyDown(KeyCode.E))
+                else if (hitTransform.gameObject.CompareTag("ShipDoor"))
                 {
-                    spaceship.ToggleDoor();
+                    textUI.UseDoor.SetActive(true);
 
-                    UItextE.SetActive(false);
-                    highlightedObject = null;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        spaceship.ToggleDoor();
 
-                    return;
+                        textUI.TextE.SetActive(false);
+                        highlightedObject = null;
+
+                        return;   
+                    }
+                }
+                else if (hitTransform.gameObject.CompareTag("CraftingBench"))
+                {
+                    textUI.craftBatteries();
                 }
             }
         }
