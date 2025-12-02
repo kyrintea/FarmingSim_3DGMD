@@ -1508,6 +1508,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aeec89fdda1711241809bbb3c177eb4d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 90222f4e15aa4f842a9ff3c73a04aced, type: 2}
     - target: {fileID: 919132149155446097, guid: aeec89fdda1711241809bbb3c177eb4d, type: 3}
       propertyPath: m_Name
       value: SpaceshipBatteries
@@ -1585,6 +1589,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 307985c6ebd47dd4f870dd7338b23f3d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 90222f4e15aa4f842a9ff3c73a04aced, type: 2}
     - target: {fileID: 919132149155446097, guid: 307985c6ebd47dd4f870dd7338b23f3d, type: 3}
       propertyPath: m_Name
       value: SpaceshipCover
@@ -3632,6 +3640,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 67713a9222c311d41ad18080bb8967ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 90222f4e15aa4f842a9ff3c73a04aced, type: 2}
     - target: {fileID: 919132149155446097, guid: 67713a9222c311d41ad18080bb8967ff, type: 3}
       propertyPath: m_Name
       value: Spaceship
