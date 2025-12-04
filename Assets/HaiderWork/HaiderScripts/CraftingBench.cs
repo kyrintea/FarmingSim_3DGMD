@@ -8,6 +8,7 @@ public class CraftingBench : MonoBehaviour
     private bool isPlayerNearby = false;
     private bool CanCraft = true;
     private TextUI textUI;
+    public bool IsCrafting = false;
 
     void Start()
     {
@@ -18,18 +19,20 @@ public class CraftingBench : MonoBehaviour
 
     void Update()
     {
-        if (isPlayerNearby == true && Input.GetKeyDown(KeyCode.E) && CanCraft == true)
+        if (IsCrafting)
+        {
+            textUI.CraftBatteries.SetActive(false);
+            return;
+        }
+
+        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && CanCraft)
         {
             if (player.ScrapMetal >= 5)
             {
-                //The first # is for how long the UI text stays on screen and the 2nd # is how long it takes to craft the item
-                //5 + 55 = 60 - 60 seconds to craft item
                 StartCoroutine(WaitAndPrint(5f, 5f));
             }
             else
             {
-                //The 1st one grabs the gameobject from a different script and the # is how long you wait
-                //before the action is done
                 StartCoroutine(UIWaitAndPrint(textUI.NotEnoughScraps, 3f));
             }
         }
@@ -40,6 +43,7 @@ public class CraftingBench : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = true;
+            textUI.CraftBatteries.SetActive(true);
         }
     }
 
@@ -48,25 +52,29 @@ public class CraftingBench : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
+            textUI.CraftBatteries.SetActive(false);
         }
     }
 
     IEnumerator WaitAndPrint(float UITextTime, float waitTime)
     {
-        textUI.craftingStarted();
         print("Crafting started...");
+        IsCrafting = true;
+        textUI.craftingStarted();
         player.ScrapMetal -= 5;
         CanCraft = false;
         yield return new WaitForSeconds(UITextTime);
         textUI.CraftingStarted.SetActive(false);
         yield return new WaitForSeconds(waitTime);
         print("Craft SUCCESS!");
+        IsCrafting = false;
         CanCraft = true;
     }
 
     IEnumerator UIWaitAndPrint(GameObject UIText, float waitTime)
     {
         UIText.SetActive(true);
+        textUI.notEnoughScraps();
         print("Not enough scrap!");
         yield return new WaitForSeconds(waitTime);
         UIText.SetActive(false);
