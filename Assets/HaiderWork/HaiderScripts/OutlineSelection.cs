@@ -10,6 +10,7 @@ public class OutlineSelection : MonoBehaviour
     private BARSmanagerScript bARSmanagerScript;
     private Spaceship spaceship;
     private TextUI textUI;
+    private CraftingBench craftingBench;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class OutlineSelection : MonoBehaviour
         bARSmanagerScript = FindAnyObjectByType<BARSmanagerScript>();
         spaceship = FindAnyObjectByType<Spaceship>();
         textUI = FindAnyObjectByType<TextUI>();
+        craftingBench = FindAnyObjectByType<CraftingBench>();
     }
 
     void Update()
@@ -27,9 +29,9 @@ public class OutlineSelection : MonoBehaviour
             Outline previousOutline = highlightedObject.GetComponent<Outline>();
             
             textUI.TextE.SetActive(false);
+            textUI.MetalCollected.SetActive(false);
             textUI.UseDoor.SetActive(false);
             textUI.EatFood.SetActive(false);
-            textUI.CraftBatteries.SetActive(false);
             textUI.CollectScraps.SetActive(false);
 
             if (previousOutline != null)
@@ -72,7 +74,8 @@ public class OutlineSelection : MonoBehaviour
                         Destroy(hitTransform.gameObject);
 
                         textUI.TextE.SetActive(false);
-                        textUI.CollectScraps.SetActive(true);
+                        textUI.CollectScraps.SetActive(false);
+                        textUI.MetalCollected.SetActive(true);
                         highlightedObject = null;
 
                         return;   // <- prevents highlight from reactivating   
@@ -105,10 +108,6 @@ public class OutlineSelection : MonoBehaviour
 
                         return;   
                     }
-                }
-                else if (hitTransform.gameObject.CompareTag("CraftingBench"))
-                {
-                    textUI.craftBatteries();
                 }
             }
         }

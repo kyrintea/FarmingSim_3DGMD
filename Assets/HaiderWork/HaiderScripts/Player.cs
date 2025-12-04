@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public bool canMove = true; 
     public float bounceForce = 12f;
 
+    private AudioSource FootSteps;
+
     CharacterController characterController;
 
     private void Start()
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour
         Cursor.visible = false;
 
         bARSmanagerScript = FindAnyObjectByType<BARSmanagerScript>();
+        FootSteps = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -65,6 +68,21 @@ public class Player : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
+
+        // Handle Footstep Audio
+        bool isMoving = (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f) 
+                        && characterController.isGrounded;
+
+        if (isMoving)
+        {
+            if (!FootSteps.isPlaying)
+                FootSteps.Play();
+        }
+        else
+        {
+            if (FootSteps.isPlaying)
+                FootSteps.Stop();
         }
     }
     void OnTriggerEnter(Collider other)

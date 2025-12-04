@@ -35,6 +35,18 @@ public class TextUI : MonoBehaviour
         CollectScraps.SetActive(false);
     }
 
+    public void notEnoughScraps()
+    {
+        NotEnoughScraps.SetActive(true);
+        
+        CraftingStarted.SetActive(false);
+        UseDoor.SetActive(false);
+        MetalCollected.SetActive(false);
+        EatFood.SetActive(false);
+        CraftBatteries.SetActive(false);
+        CollectScraps.SetActive(false);
+    }
+
     public void craftBatteries()
     {
         CraftBatteries.SetActive(true);
