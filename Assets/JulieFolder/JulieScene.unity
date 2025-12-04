@@ -687,7 +687,7 @@ MonoBehaviour:
   gravity: 7
   footstepSource: {fileID: 469738639}
   footstepClips:
-  - {fileID: 8300000, guid: 4a08296816a5a494b83c5229b275f8c4, type: 3}
+  - {fileID: 8300000, guid: f08514b32bc821344992d3f9b0d5ea00, type: 3}
   footstepInterval: 0.8
   lookSpeed: 5
   lookXLimit: 45
@@ -1681,19 +1681,19 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 858206cb8b1e678418733a368db6bd94, type: 3}
+  m_Resource: {fileID: 8300000, guid: 3ec9c522f52922e4c97af7434ed24c46, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1.59
+  m_Volume: 0.593
+  m_Pitch: 0.67
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 193
+  Priority: 150
   DopplerLevel: 1.7
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: -0.51
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
@@ -1727,7 +1727,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.36
+      value: 0.518
       inSlope: 0
       outSlope: 0
       tangentMode: 0
