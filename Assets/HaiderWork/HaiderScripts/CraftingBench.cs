@@ -24,7 +24,7 @@ public class CraftingBench : MonoBehaviour
             {
                 //The first # is for how long the UI text stays on screen and the 2nd # is how long it takes to craft the item
                 //5 + 55 = 60 - 60 seconds to craft item
-                StartCoroutine(WaitAndPrint(5f, 55f));
+                StartCoroutine(WaitAndPrint(5f, 5f));
             }
             else
             {
