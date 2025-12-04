@@ -10,6 +10,10 @@ public class Movement : MonoBehaviour
     public float runSpeed = 10.0f;
     public float jumpPower = 5.0f;
     public float gravity = 9.81f;
+    public AudioSource footstepSource;
+    public AudioClip[] footstepClips;
+    public float footstepInterval = 0.5f;
+    private float footstepTimer = 0f;
 
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
@@ -65,6 +69,8 @@ public class Movement : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
+
+        HandleFootsteps();
     }
     void OnTriggerEnter(Collider other)
     {
@@ -76,5 +82,33 @@ public class Movement : MonoBehaviour
         {
             bARSmanagerScript.TakeDamage(10f);
         }
+    }
+
+    void HandleFootsteps()
+    {
+        if (!characterController.isGrounded) return;
+
+        bool isMoving = (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f ||
+                         Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f);
+
+        if (isMoving)
+        {
+            footstepTimer -= Time.deltaTime;
+
+            if (footstepTimer <= 0f)
+            {
+                PlayFootstep();
+                float interval = Input.GetKey(KeyCode.LeftShift) ? footstepInterval * 0.6f : footstepInterval;
+                footstepTimer = interval;
+            }
+        }
+    }
+
+    void PlayFootstep()
+    {
+        if (footstepClips.Length == 0) return;
+
+        AudioClip clip = footstepClips[Random.Range(0, footstepClips.Length)];
+        footstepSource.PlayOneShot(clip);
     }
 }
