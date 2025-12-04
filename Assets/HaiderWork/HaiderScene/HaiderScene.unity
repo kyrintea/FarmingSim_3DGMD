@@ -911,6 +911,7 @@ MonoBehaviour:
   lookXLimit: 45
   ScrapMetal: 0
   canMove: 1
+  bounceForce: 12
 --- !u!1 &894638469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,6 +1599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb258bebd17e6e4995f557950f0c6e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsCrafting: 0
 --- !u!65 &1282656114
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2442,7 +2444,7 @@ Transform:
   m_GameObject: {fileID: 2114923130}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 91.2, y: 0, z: 105.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
