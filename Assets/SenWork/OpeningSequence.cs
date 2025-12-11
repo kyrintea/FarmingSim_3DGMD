@@ -20,7 +20,7 @@ public class OpeningSequence : MonoBehaviour
     {
         if (counter >= 7)
         {
-            SceneManager.LoadScene("TitleScreen");
+            SceneManager.LoadScene("HaiderMainScene");
         }
 
         if (counter == 6)
