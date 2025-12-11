@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     public float lookXLimit = 45.0f;
 
     public int ScrapMetal = 0;
+    public int BatteriesCreated = 0;
 
     Vector3 moveDirection = Vector3.zero;       
 
@@ -39,6 +41,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (BatteriesCreated == 5)
+        {
+            SceneManager.LoadScene(3);
+        }
+
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         bool isRunning = Input.GetKey(KeyCode.LeftShift);

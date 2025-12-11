@@ -69,6 +69,7 @@ public class CraftingBench : MonoBehaviour
         textUI.CraftingStarted.SetActive(false);
         yield return new WaitForSeconds(waitTime);
         print("Craft SUCCESS!");
+        player.BatteriesCreated += 1;
         IsCrafting = false;
         CanCraft = true;
     }

@@ -4074,10 +4074,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 7685187967920414990, guid: 6085e79db282ae34cb56f0b7f911b9dc, type: 3}
+      propertyPath: m_FadeMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685187967920414990, guid: 6085e79db282ae34cb56f0b7f911b9dc, type: 3}
+      propertyPath: m_AnimateCrossFading
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2861627140103621829, guid: 6085e79db282ae34cb56f0b7f911b9dc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1648879064}
   m_SourcePrefab: {fileID: 100100000, guid: 6085e79db282ae34cb56f0b7f911b9dc, type: 3}
 --- !u!1 &752751028
 GameObject:
@@ -4534,6 +4545,7 @@ MonoBehaviour:
   lookSpeed: 2
   lookXLimit: 45
   ScrapMetal: 0
+  BatteriesCreated: 0
   canMove: 1
   bounceForce: 30
 --- !u!114 &852964993
@@ -9217,6 +9229,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1774524804739533661, guid: a1641b42755142049ab45e4032f49095, type: 3}
   m_PrefabInstance: {fileID: 1636248854}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1648879062 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2861627140103621829, guid: 6085e79db282ae34cb56f0b7f911b9dc, type: 3}
+  m_PrefabInstance: {fileID: 743735994}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1648879064
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648879062}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.15, y: 1, z: 1.99}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1663564314 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1804783374622858576, guid: 1555d23ee8ceb0c4a8b784ec5e6a0d26, type: 3}
@@ -11789,6 +11827,22 @@ PrefabInstance:
     - target: {fileID: 2019622830464561635, guid: 1b2bcd953daf8cf4ba33deb3c599abf2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -2.657
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511426516043515538, guid: 1b2bcd953daf8cf4ba33deb3c599abf2, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.5419363
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511426516043515538, guid: 1b2bcd953daf8cf4ba33deb3c599abf2, type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.17817636
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511426516043515538, guid: 1b2bcd953daf8cf4ba33deb3c599abf2, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.10446129
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511426516043515538, guid: 1b2bcd953daf8cf4ba33deb3c599abf2, type: 3}
+      propertyPath: m_LODs.Array.data[3].screenRelativeHeight
+      value: 0.042383328
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
