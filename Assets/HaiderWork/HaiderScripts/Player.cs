@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private BARSmanagerScript bARSmanagerScript;
+    private AudioManager audioManager;
     public Camera playerCamera;
     public float speed = 5.0f;
     public float runSpeed = 10.0f;
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
         Cursor.visible = false;
 
         bARSmanagerScript = FindAnyObjectByType<BARSmanagerScript>();
+        audioManager = FindAnyObjectByType<AudioManager>();
         FootSteps = GetComponent<AudioSource>();
     }
 
@@ -95,6 +97,7 @@ public class Player : MonoBehaviour
         {
             bARSmanagerScript.HealOxygen(100f);
             moveDirection.y = bounceForce;
+            audioManager.boost();
         }
     }
 }

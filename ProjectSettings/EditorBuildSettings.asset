@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/SenWork/IntroCutscene.unity
-    guid: 1beb109ef174a7b498afc336fc5cf830
-  - enabled: 1
     path: Assets/SenWork/TitleScreen.unity
     guid: 2bf6476209dafde4a876f3055f68f1fb
   - enabled: 1
+    path: Assets/SenWork/IntroCutscene.unity
+    guid: 1beb109ef174a7b498afc336fc5cf830
+  - enabled: 1
     path: Assets/Scenes/HaiderMainScene.unity
     guid: 3d4f3aab4e572e448a518538ceff1ee7
+  - enabled: 1
+    path: Assets/JulieFolder/End.unity
+    guid: 6c64f823db493a146af47e70678c38b8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

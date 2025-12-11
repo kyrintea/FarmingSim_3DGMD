@@ -8,6 +8,7 @@ public class OutlineSelection : MonoBehaviour
     public float MaxRaycastDistance = 3f;
     private Player player;
     private BARSmanagerScript bARSmanagerScript;
+    private AudioManager audioManager;
     private Spaceship spaceship;
     private TextUI textUI;
     private CraftingBench craftingBench;
@@ -16,6 +17,7 @@ public class OutlineSelection : MonoBehaviour
     {
         player = FindAnyObjectByType<Player>();
         bARSmanagerScript = FindAnyObjectByType<BARSmanagerScript>();
+        audioManager = FindAnyObjectByType<AudioManager>();
         spaceship = FindAnyObjectByType<Spaceship>();
         textUI = FindAnyObjectByType<TextUI>();
         craftingBench = FindAnyObjectByType<CraftingBench>();
@@ -29,6 +31,7 @@ public class OutlineSelection : MonoBehaviour
             Outline previousOutline = highlightedObject.GetComponent<Outline>();
             
             textUI.TextE.SetActive(false);
+            textUI.InventoryFull.SetActive(false);
             textUI.MetalCollected.SetActive(false);
             textUI.UseDoor.SetActive(false);
             textUI.EatFood.SetActive(false);
@@ -66,9 +69,16 @@ public class OutlineSelection : MonoBehaviour
                 // Press E to collect and destroy
                 if (hitTransform.gameObject.CompareTag("Metal"))
                 {
-                    textUI.CollectScraps.SetActive(true);
+                    if (player.ScrapMetal >= 5)
+                    {
+                        textUI.InventoryFull.SetActive(true);
+                    }
+                    else
+                    {
+                        textUI.CollectScraps.SetActive(true);   
+                    }
 
-                    if (Input.GetKeyDown(KeyCode.E))
+                    if (Input.GetKeyDown(KeyCode.E) && player.ScrapMetal < 5)
                     {
                         player.ScrapMetal += 1;
                         Destroy(hitTransform.gameObject);
@@ -76,9 +86,16 @@ public class OutlineSelection : MonoBehaviour
                         textUI.TextE.SetActive(false);
                         textUI.CollectScraps.SetActive(false);
                         textUI.MetalCollected.SetActive(true);
+                        audioManager.metalCollected();
                         highlightedObject = null;
 
                         return;   // <- prevents highlight from reactivating   
+                    }
+                    else if (Input.GetKeyDown(KeyCode.E) && player.ScrapMetal >= 5)
+                    {
+                        textUI.CollectScraps.SetActive(false);
+                        textUI.InventoryFull.SetActive(true);
+                        audioManager.cantGrabMetal();
                     }
                 }
                 else if (hitTransform.gameObject.CompareTag("Heal"))
@@ -88,9 +105,12 @@ public class OutlineSelection : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         bARSmanagerScript.Heal(25f);
+                        audioManager.eating();
 
                         textUI.TextE.SetActive(false);
+                        textUI.EatFood.SetActive(false);
                         highlightedObject = null;
+                        Destroy(hitTransform.gameObject);
 
                         return;   
                     }
@@ -102,6 +122,7 @@ public class OutlineSelection : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         spaceship.ToggleDoor();
+                        audioManager.metalDoor();
 
                         textUI.TextE.SetActive(false);
                         highlightedObject = null;

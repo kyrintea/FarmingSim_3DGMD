@@ -10,6 +10,7 @@ public class TextUI : MonoBehaviour
     public GameObject CraftBatteries;
     public GameObject CollectScraps;
     public GameObject TextE;
+    public GameObject InventoryFull;
 
     
     void Start()
@@ -21,6 +22,7 @@ public class TextUI : MonoBehaviour
         EatFood.SetActive(false);
         CraftBatteries.SetActive(false);
         CollectScraps.SetActive(false);
+        InventoryFull.SetActive(false);
     }
 
     public void craftingStarted()
@@ -33,6 +35,7 @@ public class TextUI : MonoBehaviour
         EatFood.SetActive(false);
         CraftBatteries.SetActive(false);
         CollectScraps.SetActive(false);
+        InventoryFull.SetActive(false);
     }
 
     public void notEnoughScraps()
@@ -45,6 +48,7 @@ public class TextUI : MonoBehaviour
         EatFood.SetActive(false);
         CraftBatteries.SetActive(false);
         CollectScraps.SetActive(false);
+        InventoryFull.SetActive(false);
     }
 
     public void craftBatteries()
@@ -57,5 +61,6 @@ public class TextUI : MonoBehaviour
         MetalCollected.SetActive(false);
         EatFood.SetActive(false);
         CollectScraps.SetActive(false);
+        InventoryFull.SetActive(false);
     }
 }

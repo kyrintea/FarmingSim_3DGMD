@@ -8,6 +8,7 @@ public class CraftingBench : MonoBehaviour
     private bool isPlayerNearby = false;
     private bool CanCraft = true;
     private TextUI textUI;
+    private AudioManager audioManager;
     public bool IsCrafting = false;
 
     void Start()
@@ -15,6 +16,7 @@ public class CraftingBench : MonoBehaviour
         //Get Scripts
         player = FindAnyObjectByType<Player>();
         textUI = FindAnyObjectByType<TextUI>();
+        audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     void Update()
@@ -76,6 +78,7 @@ public class CraftingBench : MonoBehaviour
         UIText.SetActive(true);
         textUI.notEnoughScraps();
         print("Not enough scrap!");
+        audioManager.notEnoughMetal();
         yield return new WaitForSeconds(waitTime);
         UIText.SetActive(false);
     }
