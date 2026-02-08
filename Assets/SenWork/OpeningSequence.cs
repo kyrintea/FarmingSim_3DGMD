@@ -33,7 +33,7 @@ public class OpeningSequence : MonoBehaviour
 
         daAnimator.Play("Anim" + counter);
         counter++;
-        Debug.Log("button1clicked");
-        Debug.Log(counter);
+        //Debug.Log("button1clicked");
+        //Debug.Log(counter);
     }
 }

@@ -79,7 +79,7 @@ public class MaterialHolder : MonoBehaviour
 
     private IEnumerator HealthPickup()
     {
-        print("should be working");
+        //print("should be working");
         healthPickup.SetActive(true);
         healthPickupMAT.SetFloat(healthIntensity, healthIntensity_StartAmount);
 

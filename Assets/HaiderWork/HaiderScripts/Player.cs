@@ -3,97 +3,141 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [Header("References")]
     private BARSmanagerScript bARSmanagerScript;
     private AudioManager audioManager;
     public Camera playerCamera;
+    private CharacterController characterController;
+    private AudioSource footSteps;
+
+    [Header("Movement")]
     public float speed = 5.0f;
     public float runSpeed = 10.0f;
     public float jumpPower = 5.0f;
     public float gravity = 9.81f;
+    public float smoothTime = 0.1f;
 
+    [Header("Look")]
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
 
+    [Header("Game State")]
     public int ScrapMetal = 0;
     public int BatteriesCreated = 0;
-
-    Vector3 moveDirection = Vector3.zero;       
-
-    float rotationX = 0;
-
-    public bool canMove = true; 
     public float bounceForce = 12f;
+    public bool canMove = true;
 
-    private AudioSource FootSteps;
+    // Private variables
+    private Vector3 moveDirection;
+    private Vector3 moveVelocity;
+    private Vector3 smoothVelocityRef;
+    private float rotationX;
+    private float yaw;
 
-    CharacterController characterController;
-
-    private void Start()
+    void Start()
     {
         characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
+        footSteps = GetComponent<AudioSource>();
         bARSmanagerScript = FindAnyObjectByType<BARSmanagerScript>();
         audioManager = FindAnyObjectByType<AudioManager>();
-        FootSteps = GetComponent<AudioSource>();
+
+        yaw = transform.eulerAngles.y;
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
-        if (BatteriesCreated == 5)
+        CheckWinCondition();
+        HandleMouseLook();
+        HandleMovement();
+        HandleFootsteps();
+    }
+
+    void FixedUpdate()
+    {
+        characterController.Move(moveDirection * Time.fixedDeltaTime);
+    }
+
+    void CheckWinCondition()
+    {
+        if (BatteriesCreated >= 5)
         {
             SceneManager.LoadScene(3);
         }
+    }
 
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
+    void HandleMouseLook()
+    {
+        if (!canMove) return;
+
+        float mouseX = Input.GetAxisRaw("Mouse X");
+        float mouseY = Input.GetAxisRaw("Mouse Y");
+
+        rotationX -= mouseY * lookSpeed;
+        rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+        yaw += mouseX * lookSpeed;
+
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+        transform.localRotation = Quaternion.Euler(0, yaw, 0);
+    }
+
+    void HandleMovement()
+    {
+        Vector3 forward = transform.forward;
+        Vector3 right = transform.right;
+        
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runSpeed : speed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runSpeed : speed) * Input.GetAxis("Horizontal") : 0;
-        float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        float currentSpeed = isRunning ? runSpeed : speed;
+        
+        float verticalInput = canMove ? Input.GetAxis("Vertical") : 0;
+        float horizontalInput = canMove ? Input.GetAxis("Horizontal") : 0;
 
+        Vector3 targetVelocity = (forward * verticalInput + right * horizontalInput) * currentSpeed;
 
+        // Smooth horizontal movement
+        Vector3 smoothedHorizontal = Vector3.SmoothDamp(
+            new Vector3(moveVelocity.x, 0, moveVelocity.z),
+            new Vector3(targetVelocity.x, 0, targetVelocity.z),
+            ref smoothVelocityRef,
+            smoothTime
+        );
+
+        moveDirection.x = smoothedHorizontal.x;
+        moveDirection.z = smoothedHorizontal.z;
+
+        // Handle jumping and gravity
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
             moveDirection.y = jumpPower;
         }
-        else
-        {
-            moveDirection.y = movementDirectionY;
-        }
-
-        if (!characterController.isGrounded)
+        else if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
-
-        characterController.Move(moveDirection * Time.deltaTime);
-
-        if (canMove)
+        else if (moveDirection.y < 0)
         {
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+            moveDirection.y = -2f;
         }
 
-        // Handle Footstep Audio
-        bool isMoving = (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f) 
-                        && characterController.isGrounded;
+        moveVelocity = moveDirection;
+    }
 
-        if (isMoving)
+    void HandleFootsteps()
+    {
+        bool isMoving = (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f) && characterController.isGrounded;
+
+        if (isMoving && !footSteps.isPlaying)
         {
-            if (!FootSteps.isPlaying)
-                FootSteps.Play();
+            footSteps.Play();
         }
-        else
+        else if (!isMoving && footSteps.isPlaying)
         {
-            if (FootSteps.isPlaying)
-                FootSteps.Stop();
+            footSteps.Stop();
         }
     }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))

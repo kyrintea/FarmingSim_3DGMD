@@ -60,7 +60,7 @@ public class CraftingBench : MonoBehaviour
 
     IEnumerator WaitAndPrint(float UITextTime, float waitTime)
     {
-        print("Crafting started...");
+        //print("Crafting started...");
         IsCrafting = true;
         textUI.craftingStarted();
         player.ScrapMetal -= 5;
@@ -68,7 +68,7 @@ public class CraftingBench : MonoBehaviour
         yield return new WaitForSeconds(UITextTime);
         textUI.CraftingStarted.SetActive(false);
         yield return new WaitForSeconds(waitTime);
-        print("Craft SUCCESS!");
+        //print("Craft SUCCESS!");
         player.BatteriesCreated += 1;
         IsCrafting = false;
         CanCraft = true;
@@ -78,7 +78,7 @@ public class CraftingBench : MonoBehaviour
     {
         UIText.SetActive(true);
         textUI.notEnoughScraps();
-        print("Not enough scrap!");
+        //print("Not enough scrap!");
         audioManager.notEnoughMetal();
         yield return new WaitForSeconds(waitTime);
         UIText.SetActive(false);

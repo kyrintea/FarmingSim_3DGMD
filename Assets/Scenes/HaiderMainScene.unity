@@ -4997,8 +4997,8 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_SkinWidth: 0.01
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &852964988
 CapsuleCollider:
@@ -5105,16 +5105,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1840834475}
-  speed: 7
-  runSpeed: 12
+  speed: 3
+  runSpeed: 8
   jumpPower: 10
   gravity: 20
+  smoothTime: 0.1
   lookSpeed: 2
   lookXLimit: 45
   ScrapMetal: 0
   BatteriesCreated: 0
-  canMove: 1
   bounceForce: 30
+  canMove: 1
 --- !u!114 &852964993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11446,7 +11447,7 @@ Transform:
   m_GameObject: {fileID: 1840834474}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.074539185, y: 0.61076975, z: 0.69}
+  m_LocalPosition: {x: 0.074523926, y: 0.61076975, z: 0.69000244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
